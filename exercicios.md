@@ -111,3 +111,64 @@ nMedia := (nNota1Bimestre + nNota2Bimestre + nNota3Bimestre) / 3  // Calcula a m
 
 Inkey(0)  // Aguarda a entrada de uma tecla antes de encerrar o programa
 ```
+
+Calendário em harbour
+```harbour
+clear
+
+set date brit
+set epoch to 1940
+
+dNascimento := CToD("")
+dAtual      := Date()
+
+@ 01,01 say "Insira sua data de nascimento: "
+
+@ 01,33 get dNascimento valid dNascimento < dAtual
+read
+
+nDiaNascimento  := Day(dNascimento)
+nMesNascimento  := Month(dNascimento)
+nAnoAtual       := Year(dAtual)
+nAnoParaCalculo := nAnoAtual
+nMesParaCalculo := nMesNascimento
+
+if nMesNascimento == 12
+   nMesParaCalculo := 0
+   nAnoParaCalculo++
+endif
+
+dInicioMesAniversario := CToD("01/" + Str(nMesNascimento) + "/" + Str(nAnoAtual))
+dFimMesAniversario    := CToD("01/" + Str(nMesParaCalculo + 1) + "/" + Str(nAnoParaCalculo))
+nDiasMes              := dFimMesAniversario - dInicioMesAniversario
+nDiaSemanaAniversario := Dow(CToD(Str(nDiaNascimento) + "/" + Str(nMesNascimento) + "/" + Str(nAnoAtual)))
+nContador             := 1
+nLinha                := 07
+nColuna               := nDiaSemanaAniversario * 4
+
+@ 03,01 say "Calendario do mes de aniversario do ano atual"
+
+do while nContador <= nDiasMes
+   cCorDestaque := "W/N"
+   cEspacador   := ""
+
+   If nColuna > 28
+      nLinha++
+      nColuna := 4
+   endif
+
+   if nContador < 10
+      cEspacador := " "
+   endif
+
+   if nContador == nDiaNascimento
+      cCorDestaque := "W/R"
+   endif
+
+   @ 05,04 say "D   S   T   Q   Q   S   S"
+   @ nLinha,nColuna say cEspacador + AllTrim(Str(nContador)) color(cCorDestaque)
+
+   nContador++
+   nColuna += 4
+enddo
+```
