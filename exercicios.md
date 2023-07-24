@@ -127,11 +127,15 @@ dAtual      := Date()
 @ 01,33 get dNascimento valid dNascimento < dAtual
 read
 
-nDiaNascimento  := Day(dNascimento)
-nMesNascimento  := Month(dNascimento)
-nAnoAtual       := Year(dAtual)
-nAnoParaCalculo := nAnoAtual
-nMesParaCalculo := nMesNascimento
+nDiaNascimento        := Day(dNascimento)
+nMesNascimento        := Month(dNascimento)
+nAnoAtual             := Year(dAtual)
+nAnoParaCalculo       := nAnoAtual
+nMesParaCalculo       := nMesNascimento
+nDiaSemanaAniversario := Dow(CToD(Str(nDiaNascimento) + "/" + Str(nMesNascimento) + "/" + Str(nAnoAtual)))
+nContador             := 1
+nLinha                := 07
+nColuna               := nDiaSemanaAniversario * 4
 
 if nMesNascimento == 12
    nMesParaCalculo := 0
@@ -141,10 +145,6 @@ endif
 dInicioMesAniversario := CToD("01/" + Str(nMesNascimento) + "/" + Str(nAnoAtual))
 dFimMesAniversario    := CToD("01/" + Str(nMesParaCalculo + 1) + "/" + Str(nAnoParaCalculo))
 nDiasMes              := dFimMesAniversario - dInicioMesAniversario
-nDiaSemanaAniversario := Dow(CToD(Str(nDiaNascimento) + "/" + Str(nMesNascimento) + "/" + Str(nAnoAtual)))
-nContador             := 1
-nLinha                := 07
-nColuna               := nDiaSemanaAniversario * 4
 
 @ 03,01 say "Calendario do mes de aniversario do ano atual"
 
