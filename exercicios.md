@@ -132,17 +132,17 @@ nMesNascimento        := Month(dNascimento)
 nAnoAtual             := Year(dAtual)
 nAnoParaCalculo       := nAnoAtual
 nMesParaCalculo       := nMesNascimento
-nDiaSemanaAniversario := Dow(CToD(Str(nDiaNascimento) + "/" + Str(nMesNascimento) + "/" + Str(nAnoAtual)))
+dInicioMesAniversario := CToD("01/" + Str(nMesNascimento) + "/" + Str(nAnoAtual))
+dDiaSemanaInicio      := DoW(dInicioMesAniversario)
 nContador             := 1
 nLinha                := 07
-nColuna               := nDiaSemanaAniversario * 4
+nColuna               := dDiaSemanaInicio * 4
 
 if nMesNascimento == 12
    nMesParaCalculo := 0
    nAnoParaCalculo++
 endif
 
-dInicioMesAniversario := CToD("01/" + Str(nMesNascimento) + "/" + Str(nAnoAtual))
 dFimMesAniversario    := CToD("01/" + Str(nMesParaCalculo + 1) + "/" + Str(nAnoParaCalculo))
 nDiasMes              := dFimMesAniversario - dInicioMesAniversario
 
