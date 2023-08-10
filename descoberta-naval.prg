@@ -134,11 +134,7 @@ do while .t.
       endif
    enddo
 
-   if nOpcaoDerrota == 2
-      exit
-   endif
-
-   if nOpcao == 1
+   if nOpcaoDerrota == 2 .or. nOpcao == 1
       exit
    endif
 enddo
